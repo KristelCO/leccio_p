@@ -1,4 +1,5 @@
-import { Component, OnInit,ViewChild,ElementRef} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+
 
 @Component({
   selector: 'app-action-sheet',
@@ -7,20 +8,29 @@ import { Component, OnInit,ViewChild,ElementRef} from '@angular/core';
   standalone: false
 })
 export class ActionSheetPage implements OnInit {
-  @ViewChild('myButton', { static: false }) myButton!: ElementRef;
-  @ViewChild('myRadio', { static: false }) myRadio!: ElementRef;
+
+  nombres: String = 'Kristel Calberto';
+  fechaNacimiento='';
+  esMayor = false;
 
 
   constructor() { }
 
-  ngOnInit() {
-  }
-  focusButton() {
-    this.myButton.nativeElement.focus();
+  ngOnInit() { }
+
+  calcularEdad() {
+    if (!this.fechaNacimiento) return;
+    
+    const nacimiento = new Date(this.fechaNacimiento);
+    const hoy = new Date();
+    const edad = hoy.getFullYear() - nacimiento.getFullYear();
+    
+    this.esMayor = edad >= 18;
   }
 
-  focusRadio() {
-    this.myRadio.nativeElement.querySelector('input')?.focus();
+  enviar() {
+    if (this.nombres && this.fechaNacimiento && this.esMayor) {
+      alert('Registro exitoso!');
+    }
   }
-
 }

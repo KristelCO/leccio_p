@@ -1,29 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Botones</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="Regresar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro de Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-button fill="outline" #myButton>BUTTON</ion-button>
-      </ion-col>
-      <ion-col size="6">
-        <ion-item lines="none">
-          <ion-label>Radio</ion-label>
-          <ion-radio slot="end" #myRadio></ion-radio>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="6">
-        <ion-button (click)="focusButton()">FOCUS BUTTON</ion-button>
-      </ion-col>
-      <ion-col size="6">
-        <ion-button (click)="focusRadio()">FOCUS RADIO</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-list>
+    <ion-item>
+      <ion-label>Nombre:</ion-label>
+      <ion-input [(ngModel)]="nombres"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fecha Nacimiento:</ion-label>
+      <ion-input type="date" [(ngModel)]="fechaNacimiento" (ionChange)="calcularEdad()"></ion-input>
+    </ion-item>
+
+    <ion-note color="danger" *ngIf="fechaNacimiento && !esMayor">
+      Debes ser mayor de 18 años
+    </ion-note>
+  </ion-list>
+
+  <ion-button expand="block" (click)="enviar()" [disabled]="!nombres || !fechaNacimiento || !esMayor">
+    Registrarse
+  </ion-button>
 </ion-content>

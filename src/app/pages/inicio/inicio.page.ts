@@ -18,8 +18,8 @@ export class InicioPage implements OnInit {
    
   componentes: Componente[] = [ 
     { 
-      icon: 'arrow-redo-outline', 
-      name: 'Ejemplo Botones', 
+      icon: 'exit-outline', 
+      name: 'Input', 
       redirectTo: '/action-sheet' 
     }, 
     
